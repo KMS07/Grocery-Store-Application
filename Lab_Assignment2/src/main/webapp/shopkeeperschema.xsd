@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+           targetNamespace="http://www.example.org/shopkeeperschema" 
+           xmlns:tns="http://www.example.org/shopkeeperschema" 
+           elementFormDefault="qualified">
+    <xs:element name="ShopkeeperItems">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Shopkeeper">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Item" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:integer"/>
+                                        <xs:element name="nstock" type="xs:integer"/>
+                                        <xs:element name ="itemname" type="xs:string"/>
+                                        <xs:element name = "sellername" type="xs:string"/>
+                                        <xs:element name = "price" type = "xs:integer"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

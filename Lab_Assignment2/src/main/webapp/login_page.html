@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Grocery Store login</title>
+<link rel="stylesheet" href="styleregister.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="login-container">
+        <h1>Grocery Store Login</h1>
+        <form name="Form" method="get" action="loginvalidate">
+            <label for="username">Username:</label>
+            <input id="username" type="text" name="usr" />
+            
+            <label for="password">Password:</label>
+            <input id="password" type="password" name="passwd" />
+            
+            <input type="submit" onclick="return validateForm()" value="Login"/>
+            <p class="register-link"><a href="register.html">Not registered? Sign up</a></p>
+        </form>
+        <p id="error-message"></p>
+    </div>
+	<script>
+		
+		/*function validateForm(){
+			var clickedButton = document.activeElement;
+			if(clickedButton && clickedButton.name == "Submit"){
+		        let usr = document.forms["Form"]["usr"].value;
+		        let passwd = document.forms["Form"]["passwd"].value;
+		        
+		        if(usr === ""){
+					alert("Enter username");
+					return false;
+				}
+				else if(passwd === ""){
+					alert("Enter password");
+					return false;
+				}
+		    }
+		    return true;
+		}
+        // Checking if 'error' query parameter is true
+        if (window.location.search.includes('error=true')) {
+            document.getElementById('error-message').textContent = 'Invalid username or password.';
+            
+             history.replaceState(null, null, window.location.pathname);
+        }*/
+        
+        $(document).ready(function() {
+			$('form[name="Form"]').submit(function(event) {
+				var usr = $('input[name="usr"]').val();
+				var passwd = $('input[name="passwd"]').val();
+				
+				if (usr === "") {
+					alert("Enter username");
+					event.preventDefault();
+				} else if (passwd === "") {
+					alert("Enter password");
+					event.preventDefault(); // Prevent the form from submitting
+				}
+			});
+	
+			// Checking if 'error' query parameter is true
+			if (window.location.search.includes('error=true')) {
+				$('#error-message').text('Invalid username or password.');
+	
+				// Remove the 'error' query parameter from the URL
+				history.replaceState(null, null, window.location.pathname);
+			}
+		});
+	</script>
+	
+</body>
+</html>

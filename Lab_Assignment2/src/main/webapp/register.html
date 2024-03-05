@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>New user registration</title>
+<link rel="stylesheet" href="styleregister.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+	<div class="login-container registration-container">
+        <h1>New user registration</h1>
+        <img src="grocery_logo.png" class="logo"/>
+        
+        <form action="newuser" method="get" name="Form">
+            <label for="usr">Username:</label>
+            <input type="text" id="usr" name="usr" required/>
+
+            <label for="passwd">Password:</label>
+            <input type="password" id="passwd" name="passwd" required/>
+
+            <label>Type of user:</label>
+            <div class="radio-container">
+                <input type="radio" id="buyer" name="type" value="Buyer" required/>
+                <label for="buyer">Buyer</label>
+
+                <input type="radio" id="shopkeeper" name="type" value="Shopkeeper" required/>
+                <label for="shopkeeper">Shopkeeper</label>
+            </div>
+            
+            <label for="email">Email address:</label>
+            <input type="email" id="email" name="email"/>
+
+            <input type="submit" value="Submit"/>
+        </form>
+        <p id="Error" class="error-message"></p>				
+        <p id="servererrormsg" class="error-message"></p>
+        <a href="login_page.html">-> Go to login</a>
+    </div>
+	<script>
+		/*function formValidate(){
+			let usr = document.forms["Form"]["usr"].value;
+			let passwd = document.forms["Form"]["passwd"].value;
+			
+			var usernameRegex = /^[a-zA-Z0-9._-]{3,}$/;
+	    	var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	    	
+	    	if (!usernameRegex.test(usr)) {
+		        document.getElementById("Error").textContent = "Invalid username format it should be atleast of length 3 and cannot contains special characters apart from . _ -";
+		        return false;
+		    } else {
+		        document.getElementById("Error").textContent = "";
+		    }
+	
+		    if (!passwordRegex.test(passwd)) {
+		        document.getElementById("Error").textContent = "Invalid password format it should be of length atleast 8 characters with atleast 1 captial,1 lower,1 num,1 special character";
+		        return false;
+		    } else {
+		        document.getElementById("Error").textContent = "";
+		    }
+			return true;
+		}	
+		document.addEventListener("DOMContentLoaded", function() {
+	        var urlParams = new URLSearchParams(window.location.search);
+	        if (urlParams.has('error')) {
+	            document.getElementById('servererrormsg').textContent = "Username already exists";
+	        }
+    	});*/   
+    	
+    	$(document).ready(function() {
+			function formValidate() {
+				var usr = $('form[name="Form"] input[name="usr"]').val();
+				var passwd = $('form[name="Form"] input[name="passwd"]').val();
+				console.log(usr);
+				var usernameRegex = /^[a-zA-Z][a-zA-Z0-9_-]{2,}$/;
+				var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	
+				if (!usernameRegex.test(usr)) {
+					$('#Error').text('Invalid username format. It should be at least 3 characters long and start with alphabet and cannot contain special characters apart from  _ -');
+					return false;
+				} else {
+					$('#Error').text('');
+				}
+	
+				if (!passwordRegex.test(passwd)) {
+					$('#Error').text('Invalid password format. It should be at least 8 characters with at least 1 capital letter, 1 lowercase letter, 1 digit, and 1 special character.');
+					return false;
+				} else {
+					$('#Error').text('');
+				}
+				return true;
+			}
+	
+			$('form[name="Form"]').submit(function(event){
+				if (!formValidate()) {
+					event.preventDefault(); // Prevent the form from submitting
+				}
+			});
+	
+			// Checking if 'error' query parameter is present in the URL
+			var urlParams = new URLSearchParams(window.location.search);
+			if (urlParams.has('error')) {
+				$('#servererrormsg').text('Username already exists');
+			}
+		});
+	</script>
+</body>
+</html>
